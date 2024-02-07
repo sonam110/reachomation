@@ -1,0 +1,25 @@
+.card{
+    width: 100%;
+ }
+ .error{
+    color: red;
+ }
+ .imageThumb {
+   max-height: 75px;
+   border: 2px solid;
+   padding: 1px;
+   cursor: pointer;
+ }
+ .pip {
+   display: inline-block;
+   margin: 10px 10px 0 0;
+ }
+ .remove {
+   display: block;
+   text-align: center;
+   cursor: pointer;
+ }
+ .inline{
+    display: inline-block;
+ }
+ 

@@ -1,0 +1,104 @@
+.StripeElement {
+    background-color: white;
+    margin-left: 0px;
+    padding: 12px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+#card-errors{
+ font-size: 1rem;
+font-weight: 400;
+line-height: 1.45;
+color: #FF0000 !important;
+}
+
+#payment-errors{
+ font-size: 1rem;
+font-weight: 400;
+line-height: 1.45;
+color: #FF0000 !important;
+}
+
+
+label {
+margin-bottom: 10px;
+display: block;
+}
+
+.icon-container {
+margin-bottom: 20px;
+padding: 7px 0;
+font-size: 24px;
+}
+
+.btn {
+background-color: black;
+color: white;
+width: 219px;
+padding: 12px;
+margin: 10px 0;
+border: none;
+border-radius: 3px;
+cursor: pointer;
+font-size: 17px;
+}
+
+.btn:hover {
+background-color: black;
+color: white;
+width: 219px;
+padding: 12px;
+}
+
+span.price {
+float: right;
+color: grey;
+}
+
+div.error{
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.45;
+color: #FF0000 !important;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+.row {
+flex-direction: column-reverse;
+}
+.col-25 {
+margin-bottom: 20px;
+}
+}
+.form-control {
+height: 49px
+}
+#form-submit-loading
+{
+display: block;
+}
+#form-submit-loading.show
+{
+display: block;
+position: fixed;
+z-index: 50000;
+background: url(../images/loader.svg) no-repeat 50% 50% rgba(230, 159, 155, 0.27);
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+margin: 0 auto;
+}

@@ -1,0 +1,94 @@
+image: atlassian/default-image:2
+
+pipelines:
+  branches:
+    development:
+    - step:
+        name: Deploy to dev/staging server
+        script:
+          - apt-get update
+          - apt-get install -y zip
+          - zip -r reachoStage.zip . -x ".git"
+          - pipe: atlassian/aws-code-deploy:0.2.5
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              APPLICATION_NAME: 'ReachoCodeDeploy'
+              S3_BUCKET: $S3_BUCKET
+              COMMAND: 'upload'
+              ZIP_FILE: 'reachoStage.zip'
+              VERSION_LABEL: 'REACHO-1.0.0'
+          - pipe: atlassian/aws-code-deploy:0.2.5
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              APPLICATION_NAME: 'ReachoCodeDeploy'
+              DEPLOYMENT_GROUP: 'ReachoStagingDeploymentGroup'
+              S3_BUCKET: $S3_BUCKET
+              COMMAND: 'deploy'
+              WAIT: 'true'
+              VERSION_LABEL: 'REACHO-1.0.0'
+              IGNORE_APPLICATION_STOP_FAILURES: 'true'
+              FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+    master:
+    - step:
+        name: Deploy to Prod server
+        script:
+          - apt-get update
+          - apt-get install -y zip
+          - zip -r reachoProd.zip . -x ".git"
+          - pipe: atlassian/aws-code-deploy:0.2.5
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              APPLICATION_NAME: 'ReachoCodeDeploy'
+              S3_BUCKET: $S3_BUCKET
+              COMMAND: 'upload'
+              ZIP_FILE: 'reachoProd.zip'
+              VERSION_LABEL: 'REACHO-PROD-1.0.0'
+          - pipe: atlassian/aws-code-deploy:0.2.5
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              APPLICATION_NAME: 'ReachoCodeDeploy'
+              DEPLOYMENT_GROUP: 'ReachoProdDeploymentGroup'
+              S3_BUCKET: $S3_BUCKET
+              COMMAND: 'deploy'
+              WAIT: 'true'
+              VERSION_LABEL: 'REACHO-PROD-1.0.0'
+              IGNORE_APPLICATION_STOP_FAILURES: 'true'
+              FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+    pawanv1:
+    - step:
+        name: Deploy to dev server
+        script:
+          - apt-get update
+          - apt-get install -y zip
+          - zip -r reachoDev.zip . -x ".git"
+          - pipe: atlassian/aws-code-deploy:0.2.5
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              APPLICATION_NAME: 'ReachoCodeDeploy'
+              S3_BUCKET: $S3_BUCKET
+              COMMAND: 'upload'
+              ZIP_FILE: 'reachoDev.zip'
+              VERSION_LABEL: 'REACHO-DEV-1.0.0'
+          - pipe: atlassian/aws-code-deploy:0.2.5
+            variables:
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              APPLICATION_NAME: 'ReachoCodeDeploy'
+              DEPLOYMENT_GROUP: 'ReachoDevDeploymentGroup'
+              S3_BUCKET: $S3_BUCKET
+              COMMAND: 'deploy'
+              WAIT: 'true'
+              VERSION_LABEL: 'REACHO-DEV-1.0.0'
+              IGNORE_APPLICATION_STOP_FAILURES: 'true'
+              FILE_EXISTS_BEHAVIOR: 'OVERWRITE'

@@ -1,0 +1,12 @@
+p {
+    margin: 0 0;
+ }
+
+ ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+ }
+ .pt-60{
+    padding-top: 60px!important;
+ }

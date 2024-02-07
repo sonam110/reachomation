@@ -1,0 +1,9 @@
+diff a/public/js/customjs.js b/public/js/customjs.js	(rejected hunks)
+@@ -519,7 +519,6 @@
+ 
+ const incredits = () =>{
+   let credits = $("#buyCredits").val();
+-  let newcredit = parseInt(credits)+ 1;
+   let newcredit = parseInt(credits)+1;
+   $("#buyCredits").val(newcredit);
+ }
